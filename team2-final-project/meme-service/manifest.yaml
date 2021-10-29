@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: 34d754a45ed2ed2c4e6cdd93d450d03ff38ede62
+    app.openshift.io/vcs-uri: https://github.com/jm-carnicero/meme-service
+  labels:
+    app.kubernetes.io/instance: meme-service
+    app.kubernetes.io/name: meme-service
+  name: meme-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: meme-service
+    app.kubernetes.io/instance: meme-service
+    app.kubernetes.io/name: meme-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: 34d754a45ed2ed2c4e6cdd93d450d03ff38ede62
+    app.openshift.io/vcs-uri: https://github.com/jm-carnicero/meme-service
+  labels:
+    app: meme-service
+    app.kubernetes.io/instance: meme-service
+    app.kubernetes.io/name: meme-service
+  name: meme-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: meme-service
+      app.kubernetes.io/instance: meme-service
+      app.kubernetes.io/name: meme-service
+  template:
+    metadata:
+      annotations:
+        app.openshift.io/vcs-ref: 34d754a45ed2ed2c4e6cdd93d450d03ff38ede62
+        app.openshift.io/vcs-uri: https://github.com/jm-carnicero/meme-service
+      labels:
+        app: meme-service
+        app.kubernetes.io/instance: meme-service
+        app.kubernetes.io/name: meme-service
+    spec:
+      containers:
+      - image: quay.io/mhillb/meme-service:34d754a45ed2ed2c4e6cdd93d450d03ff38ede62
+        name: nextjs
+        ports:
+        - containerPort: 8888
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: 34d754a45ed2ed2c4e6cdd93d450d03ff38ede62
+    app.openshift.io/vcs-uri: https://github.com/jm-carnicero/meme-service
+  labels:
+    app.kubernetes.io/instance: meme-service
+    app.kubernetes.io/name: meme-service
+  name: meme-service
+spec:
+  to:
+    kind: Service
+    name: meme-service
