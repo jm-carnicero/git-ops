@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: 895fd8207f3d59aa9731064e00f3e0e9e820a0f3
+    app.openshift.io/vcs-uri: https://github.com/jm-carnicero/bootcamp_frontend
+  labels:
+    app.kubernetes.io/instance: team2-nextjs-frontend
+    app.kubernetes.io/name: team2-nextjs-frontend
+  name: team2-nextjs-frontend
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: team2-nextjs-frontend
+    app.kubernetes.io/instance: team2-nextjs-frontend
+    app.kubernetes.io/name: team2-nextjs-frontend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: 895fd8207f3d59aa9731064e00f3e0e9e820a0f3
+    app.openshift.io/vcs-uri: https://github.com/jm-carnicero/bootcamp_frontend
+  labels:
+    app: team2-nextjs-frontend
+    app.kubernetes.io/instance: team2-nextjs-frontend
+    app.kubernetes.io/name: team2-nextjs-frontend
+  name: team2-nextjs-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: team2-nextjs-frontend
+      app.kubernetes.io/instance: team2-nextjs-frontend
+      app.kubernetes.io/name: team2-nextjs-frontend
+  template:
+    metadata:
+      annotations:
+        app.openshift.io/vcs-ref: 895fd8207f3d59aa9731064e00f3e0e9e820a0f3
+        app.openshift.io/vcs-uri: https://github.com/jm-carnicero/bootcamp_frontend
+      labels:
+        app: team2-nextjs-frontend
+        app.kubernetes.io/instance: team2-nextjs-frontend
+        app.kubernetes.io/name: team2-nextjs-frontend
+    spec:
+      containers:
+      - image: quay.io/mhillb/team2-nextjs-frontend:895fd8207f3d59aa9731064e00f3e0e9e820a0f3
+        name: nextjs
+        ports:
+        - containerPort: 8888
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: 895fd8207f3d59aa9731064e00f3e0e9e820a0f3
+    app.openshift.io/vcs-uri: https://github.com/jm-carnicero/bootcamp_frontend
+  labels:
+    app.kubernetes.io/instance: team2-nextjs-frontend
+    app.kubernetes.io/name: team2-nextjs-frontend
+  name: team2-nextjs-frontend
+spec:
+  to:
+    kind: Service
+    name: team2-nextjs-frontend
