@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: e5265595e6e898b31ec42f535fdb63635ca5f642
+    app.openshift.io/vcs-ref: 8488626e95a0a36619004cc7ac681caa57b2e906
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/juan-carnicero-end-to-end
   labels:
     app.kubernetes.io/instance: end-to-end-assignment
@@ -22,7 +22,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: e5265595e6e898b31ec42f535fdb63635ca5f642
+    app.openshift.io/vcs-ref: 8488626e95a0a36619004cc7ac681caa57b2e906
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/juan-carnicero-end-to-end
   labels:
     app: end-to-end-assignment
@@ -39,7 +39,7 @@ spec:
   template:
     metadata:
       annotations:
-        app.openshift.io/vcs-ref: e5265595e6e898b31ec42f535fdb63635ca5f642
+        app.openshift.io/vcs-ref: 8488626e95a0a36619004cc7ac681caa57b2e906
         app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/juan-carnicero-end-to-end
       labels:
         app: end-to-end-assignment
@@ -47,7 +47,7 @@ spec:
         app.kubernetes.io/name: end-to-end-assignment
     spec:
       containers:
-      - image: quay.io/jm_carnicero/end-to-end-assignment:e5265595e6e898b31ec42f535fdb63635ca5f642
+      - image: quay.io/jm_carnicero/end-to-end-assignment:8488626e95a0a36619004cc7ac681caa57b2e906
         name: nextjs
         ports:
         - containerPort: 3000
@@ -56,7 +56,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: e5265595e6e898b31ec42f535fdb63635ca5f642
+    app.openshift.io/vcs-ref: 8488626e95a0a36619004cc7ac681caa57b2e906
     app.openshift.io/vcs-uri: https://github.com/cloud-native-garage-method-cohort/juan-carnicero-end-to-end
   labels:
     app.kubernetes.io/instance: end-to-end-assignment
